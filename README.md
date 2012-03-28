@@ -11,7 +11,7 @@
 
 * To simply download the code, you can clone the repository using:
 
-	git clone git@github.com:espanae/Social-Media-Mash-Up.git
+	`git clone git@github.com:espanae/Social-Media-Mash-Up.git`
 
 * To maintain your own version of this code, fork the project.
 	* Log into GitHub
