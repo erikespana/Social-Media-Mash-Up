@@ -20,4 +20,7 @@
 	* (Optional) You may wish to rename your project
 	* Clone your project to your local machine.
 	
-See [Cascade Server Code Party with GitHub](http://www.hannonhill.com/news/conference/2010/videos/Cascade-Server-Code-Party-with-Github.html), by Ross Williams, for more on using GitHub 
+See [Cascade Server Code Party with GitHub](http://www.hannonhill.com/news/conference/2010/videos/Cascade-Server-Code-Party-with-Github.html), by Ross Williams, for more on using GitHub
+
+### Credits ###
+My thanks to Lee Roberson (Northwestern U) for [providing the technical insight]  (http://help.hannonhill.com/discussions/how-do-i/397-how-to-aggregate-multiple-rss-feeds) needed to get this project started.
