@@ -9,7 +9,6 @@
       <dropdown-item value="Blogger"/>
       <dropdown-item value="Chatter"/>
     </text>
-    <asset type="file" identifier="thumbnail" label="Thumbnail"/>
     <text identifier="link" label="Link"/>
     <text type="dropdown" identifier="mute" label="Mute" default="No">
       <dropdown-item value="No"/>
