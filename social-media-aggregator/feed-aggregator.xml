@@ -1,0 +1,19 @@
+<system-data-structure>
+  <group identifier="folder" label="Feed" multiple="true">
+    <asset type="block" identifier="stream" label="Feed Block" render-content-depth="unlimited"/>
+    <text type="dropdown" identifier="streamType" label="Social Media Platform" default="Facebook">
+      <dropdown-item value="Facebook"/>
+      <dropdown-item value="Twitter XML user_timeline"/>
+      <dropdown-item value="Blog rss 2.0"/>
+      <dropdown-item value="Wordpress descriptions"/>
+      <dropdown-item value="Blogger"/>
+      <dropdown-item value="Chatter"/>
+    </text>
+    <asset type="file" identifier="thumbnail" label="Thumbnail"/>
+    <text identifier="link" label="Link"/>
+    <text type="dropdown" identifier="mute" label="Mute" default="No">
+      <dropdown-item value="No"/>
+      <dropdown-item value="Yes"/>
+    </text>
+  </group>
+</system-data-structure>
