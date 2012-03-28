@@ -11,11 +11,11 @@
 
 * To simply download the code, you can clone the repository using:
 
-	git clone git://github.com/espanae/Union-College.git
+	git clone git@github.com:espanae/Social-Media-Mash-Up.git
 
 * To maintain your own version of this code, fork the project.
 	* Log into GitHub
-	* Browse to [https://github.com/espanae/Union-College/tree/master/cascade-server/social-media-mash-up] (https://github.com/espanae/Union-College/tree/master/cascade-server/social-media-mash-up)
+	* Browse to [https://github.com/espanae/Social-Media-Mash-Up] (https://github.com/espanae/Social-Media-Mash-Up)
 	* Click the fork icon in the upper right portion of the page
 	* (Optional) You may wish to rename your project
 	* Clone your project to your local machine.
