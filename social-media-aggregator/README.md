@@ -1,6 +1,14 @@
 # Social Media Aggregator (Chatter Feed) 2.1 #
 
 System requirements: Cascade Server 6.10 with Velocity 1.7
+	
+### How to add a social media feed ###
+* Create a new Feed Block and enter the feed's URL.
+* Add the Feed Block to the Structured Data Block.
+	* Create a new "Feed" group.
+	* Select the previously created Feed Block using the block chooser.
+	* Leave Mute = No unless you want to ignore the Feed Block.
+	* Submit
 
 * **feed-aggregator.xml (Data Definition)**
 	
@@ -13,14 +21,6 @@ System requirements: Cascade Server 6.10 with Velocity 1.7
     * [Facebook RSS] (http://bit.ly/gettingfacebookfeeds)
     * [Twitter API user_timeline XML] (http://bit.ly/twiterapirest)
     * [Other chatter feeds] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
-	
-### How to add a social media feed ###
-* Create a new Feed Block and enter the feed's URL.
-* Add the Feed Block to the Structured Data Block.
-	* Create a new "Feed" group.
-	* Select the previously created Feed Block using the block chooser.
-	* Leave Mute = No unless you want to ignore the Feed Block.
-	* Submit
 
 ### History ###
 * [Chatter Feed 2.1] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
