@@ -1,4 +1,4 @@
-# Social Media Aggregator (Chatter Feed) 2.1 #
+# Social Media Aggregator 2.1 #
 
 System requirements: Cascade Server 6.10 with Velocity 1.7
 	
@@ -23,5 +23,5 @@ System requirements: Cascade Server 6.10 with Velocity 1.7
     * [Other chatter feeds] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
 
 ### History ###
-* [Chatter Feed 2.1] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
-* [Chatter Feed 2.0] (http://bit.ly/tvS7Py)
+* [Social Media Aggregator 2.1] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
+* [Social Media Aggregator 2.0] (http://bit.ly/tvS7Py)
