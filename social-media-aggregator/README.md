@@ -1,8 +1,8 @@
 # Social Media Aggregator 2.1 #
 
-System requirements: Cascade Server 6.10 with Velocity 1.7
+Requires: Cascade Server 6.10 with Velocity 1.7
 	
-### How to add a social media feed ###
+### Instructions ###
 * Create a Feed Block for each social media's RSS feed.
 * Create a Structured Data Block using **feed-aggregator.xml** as its data definition.
 * Edit the Structured Data Block.
@@ -18,7 +18,7 @@ System requirements: Cascade Server 6.10 with Velocity 1.7
 	* Assign the Structured Data Block to the default block.
 	* Assign **feed-block-aggregator.vm** as the default region.
 
-### Files ###
+### What's here ###
 * **feed-aggregator.xml (Data Definition)**
 	
 	This is the data definition for the Structured Data Block(s).
