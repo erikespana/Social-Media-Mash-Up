@@ -1,0 +1,106 @@
+#*  Special Interest Feature promoting Admissions Bloggers
+
+    Generates a random blog image and desciption.
+    Expects the "Admisions blogs" Structured Data Block attached to the SPIF-right-col region.
+
+    System requirements: Cascade Server 6.10 and PHP
+*#
+
+
+### XPaths
+
+#set ( $xpathBlogLink = "stream/content/rss/channel/link" )
+#set ( $xpathImg = "spif/thumbnail/path" )
+#set ( $titleXPath = "stream/content/rss/channel/item[1]/title" )
+#set ( $xpathQuote = "stream/content/rss/channel/item[1]/description" )
+#set ( $xpathPostLink = "stream/content/rss/channel/item[1]/link" )
+#set ( $feeds = $_XPathTool.selectNodes( $contentRoot, "//feed[mute = 'No']" ))
+
+
+### The maximum number of characters for each quote.
+
+#set ( $maxChars = 75 )
+
+
+### Build a PHP array of all the bloggers
+
+#foreach ($feed in $feeds)
+
+	#set ( $postLink = $_XPathTool.selectSingleNode( $feed, $xpathPostLink ).text )
+	#set ( $img = $_XPathTool.selectSingleNode( $feed, $xpathImg ).text )
+	
+	### Grab the first quote.
+	#set ( $quote = $_XPathTool.selectSingleNode( $feed, $xpathQuote ).text )
+	
+	## Convert the description to plain text by stripping HTML tags.
+	#set ( $quote = $_DisplayTool.stripTags( $quote) )
+	
+	
+	###	If (after stripping HTML tags) the description is blank, grab the title.
+		
+	#if ( $quote == "" )
+		#set ( $quote = $_XPathTool.selectSingleNode( $feed, $titleXPath ).text )
+	
+	
+	### Otherwise, grab the first sentence
+	#else
+		#set ( $firstSentence = $_StringTool.substringBefore($quote, ".") )
+		
+		
+		### If a period was not found, shorten the description based on $maxChars	
+		#if ( $firstSentence == "" )
+			#set ( $truncated = $_DisplayTool.truncate( $quote, $maxChars, "", true) )
+			#set ( $quote =  "${truncated} ...")
+	
+	
+		### otherwise use the first sentence.
+		#else
+			#set ( $quote = "${firstSentence}." )
+		#end
+	#end
+	
+	
+	<!--#START-CODE
+	<?php
+	  $arrayidx = count($bloggers);
+	  $bloggers[ $arrayidx ] = array(
+		  0 => "${postLink}",
+		  1 => "${img}",
+		  2 => "${quote}",
+		  );
+	?>
+	#END-CODE-->
+#end
+
+
+### SPIF start
+
+<div class="feature-widget aside-widget aside-banner-overlap small-slides-outer">
+    <div class="feature-header">
+        <div class="title">STUDENT BLOG</div>
+        <div class="subtitle">Union as Students Experience It</div>
+    </div>
+    
+    
+### Pick a random blog and style it.
+    <!--#START-CODE
+    <?php
+        $index = rand(0, 6);
+        $blog = $bloggers[ $index ];
+        
+        echo '
+        <div class="feature-content">
+           <a href="' . $blog[0] . '">
+                <img src="' . $blog[1] . '">
+            </a>
+			<div class="subtitle">
+				' . $blog[2] . '
+				<br/>
+				<a href="' . $blog[0] . '">Read more</a>
+			</div>
+        </div>
+';
+    ?>
+    #END-CODE-->
+	
+</div>
