@@ -21,7 +21,16 @@ Requires: Cascade Server 6.10 with Velocity 1.7
 ### What's here ###
 * **feed-aggregator.xml (Data Definition)**
 	
-	This is the data definition for the Structured Data Block(s).
+	This is the data definition for the Structured Data Block, which is aggregates one or more [feed blocks](http://www.hannonhill.com/kb/XML-Feed-Block/).
+    
+    `<system-data-structure>
+    <feed>
+        <stream/>
+        <streamType/>
+        <mute/>
+    </feed>
+    ...
+    </system-data-structure>`
 * **feed-block-aggregator.vm**
 	
 	Parses a Structured Data Block and returns an XML feed of each Feed Block's most recent status update.    
