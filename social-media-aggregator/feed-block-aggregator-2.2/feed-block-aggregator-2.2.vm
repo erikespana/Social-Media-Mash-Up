@@ -1,0 +1,123 @@
+#*  Social Media Aggregator
+    
+    Aggregates the most recent status update from multiple social media feeds using a custom Structured Data Block.
+    
+    https://github.com/espanae/Social-Media-Mash-Up
+*#
+
+
+###  Configurable variables ###
+
+
+## The Maximum number of characters for each description.
+#set ( $maxChars = 400 )
+
+## The Structured Data Block elements to be parsed.
+#set ( $feeds = $_XPathTool.selectNodes( $contentRoot, "//feed[mute = 'No']" ))
+
+
+###  Private variables ###
+
+
+## Get the current date and time.
+#set ( $currentDate = $_DateTool.getDate() )
+
+## Initialize the feed counter variable.
+#set ( $streamsProcessed = 0 )
+
+
+#import('/_Site Support/Formats/feed-block-aggregator/macros')
+
+#*  <item>
+          <media>
+                <name/>
+                <link/>
+                <type/>
+            </media>
+            <message>
+                <title/>
+                <description/>
+                <link/>
+                <pubDate/>
+                <datetime/>
+            </message>
+        </item>
+*#
+
+
+#*  Main program. Creates the chatter XML feed:
+    <chatter verion="2.0">
+        <lastPublished/>
+        <streamsIndexed/>
+        <item> +
+        <processTime/>
+        <streamsProcessed/>
+    </chatter>
+*#
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<chatter version="2.1">
+    <lastPublished>${_DateTool.format('EEE, dd MMM yyyy HH:mm:ss Z', $currentDate)}</lastPublished>
+    <streamsIndexed>${feeds.size()}</streamsIndexed>
+
+## Loop through each Feed Block and grab the most recent status update.
+    
+#foreach( $feed in $feeds )
+    #set ( $item = '' )
+    #set ( $streamType = $feed.getChild( 'streamType' ).text )
+    #set ( $thumbnail = '' )
+    
+    ## Figure out the path to the most recent item
+        
+    #if ( $streamType == 'Twitter XML user_timeline' )
+        #set ( $xpath = 'stream/content/statuses/status' )
+        
+    #elseif (   ($streamType == 'Blog rss 2.0') ||
+                ($streamType == 'Wordpress descriptions') )
+        #set ( $xpath = 'stream/content/rss/channel/item[1]' )
+        #set ( $thumbnail = $_XPathTool.selectSingleNode($feed, "misc/thumbnail/path").text )
+        
+    #elseif ( $streamType == 'Facebook' )
+        #set ( $xpath = "stream/content/rss/channel/item[ not( contains(description, '&lt;') )][1]" )
+        
+    #elseif ( $streamType == 'Chatter' )
+        #set ( $xpath = "stream/content/chatter" )
+    #end
+    
+    #set ( $item = $_XPathTool.selectSingleNode( $feed, $xpath ))
+    
+    #if ( $streamType != 'Chatter' )
+        
+        ## Count how many "most recent" status updates.
+        #set ( $count = $_XPathTool.selectSingleNode( $feed, "count(${xpath})" ))
+            
+        #if ( $count > 0 )
+        <item>
+            <media>
+                #nameAndLink ( $item $streamType )
+                <type>${streamType}</type>
+                #if ( $thumbnail != '' )
+                    <thumbnail>${thumbnail}</thumbnail>
+                #end
+            </media>
+            <message>
+                #msgTitle ( $item $streamType )
+                #msgDescription ( $item $streamType $maxChars )
+                #msgLink ( $item $streamType )
+                #msgDates ( $item $streamType )
+            </message>
+        </item>
+            #set ( $streamsProcessed = $streamsProcessed + 1 )
+        #end
+    #else
+        ##
+        $_SerializerTool.serialize( $item, true )
+    #end
+
+#end
+
+    #set ( $complete = $_DateTool.getDate() )
+    <processTime>${_DateTool.difference( $currentDate, $complete )}</processTime>
+    <streamsProcessed>${streamsProcessed}</streamsProcessed>
+    
+</chatter>

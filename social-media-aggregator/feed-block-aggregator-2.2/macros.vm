@@ -1,0 +1,84 @@
+###  Functions ###
+
+## Generate the description field.
+#macro ( msgDescription $item $streamType $maxChars )
+    #set ( $d = "" )
+
+    #if ( $streamType == 'Twitter XML user_timeline' )
+        #set ( $d = $item.getChild( 'text' ).text )
+    #else
+        #set ( $d = $_DisplayTool.stripTags( $item.getChild('description').text) )
+        #set ( $d = $_DisplayTool.truncate( $d, $maxChars, "", true) )
+    #end
+    <description>${_EscapeTool.xml( $d )}</description>
+#end
+
+## Generate the pubDate & datetime fields
+#macro ( msgDates $item $streamType )
+
+    #if ( $streamType == 'Twitter XML user_timeline' )
+        #set ( $textDate = $item.getChild( 'created_at' ))
+        #set ( $pattern = "EEE MMM dd H:m:s Z yyyy" )
+    #elseif (   ($streamType == 'Blog rss 2.0') ||
+                ($streamType == 'Wordpress descriptions') ||
+                ($streamType == 'Facebook') ||
+                ($streamType == 'Blog rss 0.92') )
+        ## E.g. Sun, 27 Nov 2011 23:35:59 +0000
+        #set ( $pattern = "EEE, dd MMM yyyy H:m:s Z" )
+        #set ( $textDate = $item.getChild( 'pubDate' ))
+        
+        #if ( $textDate.value == '' )
+            #set ( $textDate = $_XPathTool.selectSingleNode( $item, "../lastBuildDate" ).text )
+        #end
+    #else
+        #set ( $textDate = "" )
+    #end
+    
+    
+    ## Fri Nov 18 16:02:11 +0000 2011
+    #set ( $pubDate = $_DateTool.toDate( $pattern, $textDate.value ))   
+    <pubDate>${_DateTool.format('medium', $pubDate)}</pubDate>
+    <datetime>${_DateTool.format( 'yyyyMMddHHmmss', $pubDate)}</datetime>
+#end
+
+
+## Generate the title field
+#macro ( msgTitle $item $streamType )
+    #if ( $streamType == 'Twitter XML user_timeline' )
+        #set ( $title = $item.getChild( 'text' ) )
+    #else
+        #set ( $title = $item.getChild( 'title' ) )
+    #end
+    <title>${_EscapeTool.xml( $title.value )}</title>
+#end
+
+
+## Provide the link to the status update
+#macro ( msgLink $item $streamType )
+    #if ( $streamType == 'Twitter XML user_timeline' )
+        #set ( $id = $item.getChild( 'id' ).text )
+        #set ( $screen_name = $_XPathTool.selectSingleNode( $item, "user/screen_name" ).text )
+        #set ( $link = "http://twitter.com/${screen_name}/status/${id}" )
+    #else
+        #set ( $link = $item.getChild( 'link' ).text )
+    #end
+    <link>${_EscapeTool.xml( $link )}</link>
+#end
+
+## Provide the name & link to the social media account
+#macro ( nameAndLink $item $streamType )
+
+    #if ( $streamType == 'Twitter XML user_timeline' )
+        #set ( $name = $_XPathTool.selectSingleNode( $item, "user/name" ) )
+        #set ( $link = $_XPathTool.selectSingleNode( $item, "user/screen_name" ) )
+    #else
+        #set ( $name = $_XPathTool.selectSingleNode( $item, "../title" ) )
+        #set ( $link = $_XPathTool.selectSingleNode( $item, "../link" ) )
+    #end
+    <name>${_EscapeTool.xml( $name.value )}</name>
+    #if ( $link.value == '' )
+        <link/>
+    #else
+        <link>${_EscapeTool.xml( $link.value )}</link>
+    #end
+#end
