@@ -1,4 +1,4 @@
-# Social Media Aggregator 2.1 #
+# Social Media Aggregator 2.2 #
 
 Requires: Cascade Server 6.10 with Velocity 1.7
 	
@@ -23,14 +23,14 @@ Requires: Cascade Server 6.10 with Velocity 1.7
 	
 	This is the data definition for the Structured Data Block, which is aggregates one or more [feed blocks](http://www.hannonhill.com/kb/XML-Feed-Block/).
     
-    `<system-data-structure>
-    <feed>
-        <stream/>
-        <streamType/>
-        <mute/>
-    </feed>
-    ...
-    </system-data-structure>`
+    `<system-data-structure>`
+    `<feed>`
+    `    <stream/>`
+    `    <streamType/>`
+    `    <mute/>`
+    `</feed>`
+    `...`
+    `</system-data-structure>`
 * **feed-block-aggregator.vm**
 	
 	Parses a Structured Data Block and returns an XML feed of each Feed Block's most recent status update.    
@@ -41,5 +41,6 @@ Requires: Cascade Server 6.10 with Velocity 1.7
     * [Other chatter feeds] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
 
 ### History ###
+* [Social Media Aggregator 2.2] (Renamed Structured Data Block fields)
 * [Social Media Aggregator 2.1] (http://muse.union.edu/espanae/2011/12/06/chatter-feed-2-1/)
 * [Social Media Aggregator 2.0] (http://bit.ly/tvS7Py)
