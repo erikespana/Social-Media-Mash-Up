@@ -1,4 +1,4 @@
-###  Functions ###
+##  Get the status update or blog description and save it in between <description> tags.
 
 ## Generate the description field.
 #macro ( msgDescription $item $streamType $maxChars )
@@ -12,6 +12,7 @@
     #end
     <description>${_EscapeTool.xml( $d )}</description>
 #end
+
 
 ## Generate the pubDate & datetime fields
 #macro ( msgDates $item $streamType )
