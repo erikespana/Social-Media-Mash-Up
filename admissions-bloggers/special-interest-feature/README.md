@@ -2,5 +2,5 @@
 	
 * **spif-right-column-top.xsl**
 
-Displays a random blogger's image and an excerpt from their most recent post.
-Expects the "Admisions blogs" Structured Data Block attached to the SPIF-right-col region
+	Uses embedded PHP code to display a random image and an excerpt from a recent blog post.
+	Expects the "Admisions blogs" Structured Data Block attached to the SPIF-right-col region
