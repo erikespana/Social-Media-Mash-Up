@@ -24,7 +24,17 @@
         <xsl:param name="vertical-position"/>
         <xsl:param name="feeds" select="randomWordpress/block/content/system-data-structure/feed[mute = 'No']"/>
         
-        <!-- Initialize PHP array -->
+        <!-- Pre-load the link, thumbnail, post and blog title for each blogger's most recent post, using a PHP array.
+            For Example:
+            $bloggers[]= array(
+                0 => ""http://muse.union.edu/unfiltered/path/to/blog/post/",
+                1 => "/img/bloggers/blogger.jpg",
+                2 => "Excerpt",
+                3 => "Blog title"
+            );
+            $bloggers[]= array(
+            ...
+        -->
         <xsl:comment>#START-CODE
         &lt;?php
             <xsl:apply-templates select="$feeds"/>
@@ -57,6 +67,7 @@
             0 =&gt; "<xsl:value-of select="stream/content/rss/channel/item[1]/link"/>",
             1 =&gt; "<xsl:value-of select="spif/thumbnail/path"/>",
             2 =&gt; "<xsl:value-of select="stream/content/rss/channel/item[1]/title"/>",
+            3 =&gt; "<xsl:value-of select="stream/content/rss/channel/title"/>",
         );
     </xsl:template>
     
@@ -68,7 +79,7 @@
             echo '
                 &lt;div class="small-slides"&gt;
                     &lt;a href="' . $blog[0] . '"  target="_blank"&gt;
-                        &lt;img src="' . $blog[1] . '"/&gt;
+                        &lt;img src="' . $blog[1] . '" alt="' . $blog[3] . '"/&gt;
                     &lt;/a&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -76,7 +87,7 @@
             &lt;div class="description"&gt;
                 &lt;q&gt;' . $blog[2] . '&lt;/q&gt;
                 &lt;br/&gt;
-                &lt;a href="' . $blog[0] . '" target="_blank"&gt;Read more...&lt;/a&gt;
+                &lt;a href="'.$blog[0].'" target="_blank" title="'.$blog[2].'"&gt;Read more...&lt;/a&gt;
             &lt;/div&gt;';
         ?&gt;
         #END-CODE</xsl:comment>
