@@ -12,4 +12,4 @@
 	* Set format to reboot/_Site Support/Formats/SPIF/spif-right-column-top
 
 	**Implementation**
-	* Embed each blogger's most recent post using PHP code and schedule page to publish periodically.
+	* Embed each blogger's most recent post using PHP code and schedule the page to publish periodically.
