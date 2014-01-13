@@ -4,15 +4,14 @@
 	
 * **spif-right-column-top.xsl**
 
-	Displays a random blog post as a Special Interest Feature.
+	Displays a random [Unfiltered](http://muse.union.edu/unfiltered) blog post in a special interest feature. For example: [http://www.union.edu/campus](http://www.union.edu/campus)
 
-	How to Use:
-	Attach to the SPIF-RIGHT-COLUMN region of a page.
-	Set block to reboot/_Site Support/Banks/SPIF - New/Right Column/Random Wordpress
-	Set format to reboot/_Site Support/Formats/SPIF/spif-right-column-top
+	**How to Use**
+	* Attach to the SPIF-RIGHT-COLUMN region of a page.
+	* Set block to reboot/_Site Support/Banks/SPIF - New/Right Column/Random Wordpress
+	* Set format to reboot/_Site Support/Formats/SPIF/spif-right-column-top
 
-	Example:
-	[http://www.union.edu/campus](http://www.union.edu/campus)
+	
 
 	Implementation:
 	Uses embedded PHP code.
